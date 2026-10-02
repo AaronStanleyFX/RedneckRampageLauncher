@@ -1,0 +1,25 @@
+// Redneck Rampage Trainer : entree "Trainer" dans le menu Echap en jeu
+AddListMenu "IngameMenu" before "OptionsMenu"
+{
+	ifgame(Redneck, RedneckRides)
+	{
+		DukeTextItem "Trainer", "t", "RRTrainerMenu"
+	}
+}
+
+OptionMenu "RRTrainerMenu"
+{
+	Caption "Trainer"
+	RRToggle "Infinite Health",        "rrtr_health_tog", "rrtr_s_health"
+	RRToggle "Infinite Ammo",          "rrtr_ammo_tog",   "rrtr_s_ammo"
+	RRToggle "Infinite Inventory",     "rrtr_inv_tog",    "rrtr_s_inv"
+	RRToggle "Fly Mode",               "rrtr_fly_tog",    "rrtr_s_fly"
+	RRToggle "No Clip",                "rrtr_clip_tog",   "rrtr_s_clip"
+	RRToggle "Remove Enemies",         "rrtr_mon_tog",    "rrtr_s_mon"
+	StaticText " "
+	Command  "Erase Buildings",  "rrtr_build", 0, 1
+	StaticText " "
+	StaticText "Fly Mode: jump to take off,", 1
+	StaticText "then move while looking up / down.", 1
+	StaticText "Buildings: reload the level to restore them.", 1
+}

@@ -1,0 +1,31 @@
+version "4.12"
+
+// Redneck Rampage Trainer : ligne de menu ON/OFF.
+// Execute la commande console donnee (alias du trainer) et affiche
+// l'etat lu dans une variable console (rrtr_s_xxx).
+class OptionMenuItemRRToggle : OptionMenuItemCommand
+{
+	Name mStateName;
+	CVar mState;
+
+	OptionMenuItemRRToggle Init(String label, Name command, Name statecvar)
+	{
+		Super.Init(label, command);
+		mStateName = statecvar;
+		return self;
+	}
+
+	bool IsOn()
+	{
+		if (mState == null) mState = CVar.FindCVar(mStateName);
+		return mState != null && mState.GetInt() != 0;
+	}
+
+	override int Draw(OptionMenuDescriptor desc, int y, int indent, bool selected)
+	{
+		drawLabel(indent, y, selected ? OptionMenuSettings.mFontColorSelection : OptionMenuSettings.mFontColor);
+		bool on = IsOn();
+		drawValue(indent, y, on ? Font.CR_GREEN : Font.CR_RED, on ? "ON" : "OFF", false, false);
+		return indent;
+	}
+}
